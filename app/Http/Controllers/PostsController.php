@@ -10,4 +10,16 @@ class PostsController extends Controller
     {
         return view('posts.create');
     }
+
+    public function store()
+    {
+        $data = request()->validate([
+            'caption' => 'required',
+            'image' => ['required', 'image'],
+        ]);
+
+        auth()->user()->posts()->create($data);
+
+        dd(request()->all());
+    }
 }
