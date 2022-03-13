@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="container">
-
         <div class="row">
             <div class="col-3 p-5">
                 <picture>
@@ -10,15 +9,18 @@
                 </picture>
             </div>
             <div class="col-9 pt-5">
-                <div><h1>{{ $user->username }}</h1></div>
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <h1>{{ $user->username }}</h1>
+                    <a href="#">Add New Post</a>
+                </div>
                 <div class="d-flex">
                     <div class="pe-5"><strong>152</strong> posts</div>
                     <div class="pe-5"><strong>23k</strong> followers</div>
                     <div class="pe-5"><strong>266</strong> following</div>
                 </div>
-                <div><strong>Instaclone</strong></div>
-                <div><p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit. <br> Aspernatro optio perspiciatis temporibus ut? Nobis, quaerat?</p></div>
-                <div><a href="http://127.0.0.1:8000/home">www.Instaclone.org</a></div>
+                <div class="pt-3"><strong>{{ $user->profile->title }}</strong></div>
+                <div><p class="mb-0">{{ $user->profile->description }}</p></div>
+                <div><a href="http://127.0.0.1:8000/profile/#">{{ $user->profile->url }}</a></div>
             </div>
 
             <div class="row pt-5">
