@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-3 p-5">
                 <picture>
-                    <img src="https://www.freecodecamp.org/news/content/images/2021/05/freecodecamp-org-gravatar.jpeg" class="rounded-circle w-75 h-100">
+                    <img src="https://i.pinimg.com/280x280_RS/f4/cc/c1/f4ccc1496f8c09fbe24eeec48e13cd90.jpg" class="rounded-circle w-75 h-100">
                 </picture>
             </div>
             <div class="col-9 pt-5">

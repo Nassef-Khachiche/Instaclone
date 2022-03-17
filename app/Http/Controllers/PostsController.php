@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Faker\Provider\Image;
+use Illuminate\Support\File;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -17,14 +18,18 @@ class PostsController extends Controller
         return view('posts.create');
     }
 
-    public function store()
+    public function store(Request $request)
     {
         $data = request()->validate([
             'caption' => 'required',
             'image' => ['required'],
         ]);
 
-        auth()->user()->posts()->create($data);
-        dd(request()->all());
+         $imagePath = request('image')->store('uploads', 'public');
+        auth()->user()->posts()->create([
+            'caption' => $data['caption'],
+            'image' => $imagePath,
+        ]);
+        return redirect('/profile/' . auth()->user()->id);
     }
 }
