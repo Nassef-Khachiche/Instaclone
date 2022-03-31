@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <form action="/p" enctype="multipart/form-data" mehtod="POST">
+    <div class="container form-control p-5 w-100">
+        <form action="/p" enctype="multipart/form-data" method="POST">
             @csrf
             <div class="row">
                 <div class="col-8 offset-2">
@@ -27,9 +27,9 @@
                     </div>
 
                     <div class="row">
-                        <label for="image" class="col-md-4 col-form-label w-100">Post Image</label>
+                        <label for="image" class="col-md-4 col-form-label w-100 form-label">Post Image</label>
 
-                        <input type="file" class="form-control-file" id="image" name="image">
+                        <input type="file" class="form-control-file form-control" id="image" name="image">
 
 
                         @error('image')
@@ -37,8 +37,8 @@
                         @enderror
                     </div>
 
-                    <div class="row pt-4">
-                        <button class="btn btn-primary w-25">Add New Post</button>
+                    <div class="row p-5 d-flex justify-content-center">
+                        <button class="btn btn-primary w-75">Add New Post</button>
                     </div>
                 </div>
             </div>

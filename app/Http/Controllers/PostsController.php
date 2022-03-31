@@ -6,6 +6,7 @@ use Faker\Provider\Image;
 use Illuminate\Support\File;
 use Illuminate\Http\Request;
 
+
 class PostsController extends Controller
 {
     public function __construct()
@@ -22,14 +23,15 @@ class PostsController extends Controller
     {
         $data = request()->validate([
             'caption' => 'required',
-            'image' => ['required'],
+            'image' => ['required', 'image'],
         ]);
+        $imagePath = $request->file('image')->store('uploads','public');
 
-         $imagePath = request('image')->store('uploads', 'public');
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
             'image' => $imagePath,
         ]);
+
         return redirect('/profile/' . auth()->user()->id);
     }
 }
