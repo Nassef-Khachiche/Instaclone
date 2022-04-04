@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Faker\Provider\Image;
 use Illuminate\Support\File;
 use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 
 class PostsController extends Controller
@@ -26,6 +26,10 @@ class PostsController extends Controller
             'image' => ['required', 'image'],
         ]);
         $imagePath = $request->file('image')->store('uploads','public');
+        $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
+        $image->save();
+
+//        $message = $image == 1 ? "post" : "posts";
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
@@ -33,5 +37,9 @@ class PostsController extends Controller
         ]);
 
         return redirect('/profile/' . auth()->user()->id);
+    }
+
+    public function show(\App\Models\Post $post) {
+        return view('posts.show', compact('post'));
     }
 }
