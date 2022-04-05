@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Support\File;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image;
@@ -14,9 +15,9 @@ class PostsController extends Controller
         $this->middleware('auth');
     }
 
-    public function create()
+    public function create(User $user)
     {
-        return view('posts.create');
+        return view('posts.create', compact('user'));
     }
 
     public function store(Request $request)
@@ -25,11 +26,10 @@ class PostsController extends Controller
             'caption' => 'required',
             'image' => ['required', 'image'],
         ]);
+
         $imagePath = $request->file('image')->store('uploads','public');
         $image = Image::make(public_path("storage/{$imagePath}"))->fit(1200, 1200);
         $image->save();
-
-//        $message = $image == 1 ? "post" : "posts";
 
         auth()->user()->posts()->create([
             'caption' => $data['caption'],
@@ -39,7 +39,7 @@ class PostsController extends Controller
         return redirect('/profile/' . auth()->user()->id);
     }
 
-    public function show(\App\Models\Post $post) {
+    public function show(Post $post) {
         return view('posts.show', compact('post'));
     }
 }
